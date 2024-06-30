@@ -51,6 +51,8 @@ MemLoop:
     ;;;       before the call to "sta" for that address.  I have not updated the code to correct this, but more info here:
     ;;;       https://courses.pikuma.com/courses/take/nes-game-programming-tutorial/lessons/38045493-our-first-assembly-bug
 
+    ;;; Look at companion file clearmem-improved.asm for the better solution
+
 IRQ:
     rti                           ; Simply Return from Interrupt (rti)
 
