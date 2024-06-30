@@ -46,6 +46,11 @@ MemLoop:
     dex                           ; Decrement the value of X by one
     bne MemLoop                   ; If the Zero flag was not set by the previous decrement, go back to MemLoop
 
+    ;;; NOTE: There is a one-off bug in the above code that results in the $00 position not being cleared out.
+    ;;;       Stepping through, we can see the result of the decrement from $01 to $00 causes the break to occur
+    ;;;       before the call to "sta" for that address.  I have not updated the code to correct this, but more info here:
+    ;;;       https://courses.pikuma.com/courses/take/nes-game-programming-tutorial/lessons/38045493-our-first-assembly-bug
+
 IRQ:
     rti                           ; Simply Return from Interrupt (rti)
 
@@ -54,7 +59,7 @@ IRQ:
 ;;  - Must always be the very last bytes of the program      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 .segment "VECTORS"
-.org $FFFA
-.word NMI                         ; Non-maskable interrupt instruction (points to NMI label, above)
-.word RESET                       ; Reset request instruction; Also called when the game is started (points to RESET label, above)
-.word IRQ                         ; Interrupt request instruction (points to IRQ label, above)
+.org $FFFA                        ; Address $FFFA is 6 Bytes from the end of the Chip's memory. Fill those 6 bytes with the Vectors:
+.word NMI                         ; These 2 Bytes at $FFFA - Non-maskable interrupt instruction (points to NMI label, above)
+.word RESET                       ; These 2 Bytes at $FFFC - Reset request instruction; Also called when the game is started (points to RESET label, above)
+.word IRQ                         ; These 2 Bytes at $FFFE - Interrupt request instruction (points to IRQ label, above)
