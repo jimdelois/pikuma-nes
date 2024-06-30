@@ -1,0 +1,4 @@
+# Build artifacts in any directories
+*/*.o
+*/*.nes
+*/*.fdb
