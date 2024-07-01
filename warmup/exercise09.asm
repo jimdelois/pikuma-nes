@@ -19,10 +19,15 @@
 ; set (zero if the compared values are equal, non-zero if different).
 RESET:
     ; Initialize the A register with 1
-    ; TODO:
+    lda #1
+Loop:
     ; Increment A
+    clc
+    adc #1
     ; Compare the value in A with the decimal value 10
+    cmp #10
     ; Branch back to "Loop" if the comparison was not equals (to zero)
+    bne Loop
 
 ;;; End of program...
 LoopForever:

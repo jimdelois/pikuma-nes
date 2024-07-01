@@ -23,12 +23,19 @@
 ;  Val: |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |
 ;       -------------------------------------------------------------------
 RESET:
-    ; TODO:
     ; Initialize the Y register with the decimal value 10
-    ; Transfer Y to A
-    ; Store the value in A inside memory position $80+Y
+    ldy #10
+    iny ; I have added this line and rearranged the list, below, to make sure that we
+        ; still set $00 into $80 before breaking the loop
+Loop:
     ; Decrement Y
+    dey
+    ; Transfer Y to A
+    tya
+    ; Store the value in A inside memory position $80+Y
+    sta $80,y
     ; Branch back to "Loop" until we are done
+    bne Loop
 
 ;;; End of program...
 LoopForever:

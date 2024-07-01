@@ -20,11 +20,14 @@
 ; processor because we can store them using only 1 byte (8 bits), which also
 ; means they can be performed relatively fast by the CPU.
 RESET:
-    ; TODO:
     ; Load the A register with the decimal value 10
+    lda #10
     ; Store the value from A into memory position $80
+    sta $80
     ; Increment the value inside a (zero page) memory position $80
+    inc $80
     ; Decrement the value inside a (zero page) memory position $80
+    dec $80
 
 ;;; End of program...
 LoopForever:
