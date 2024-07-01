@@ -23,10 +23,10 @@ RESET:
     txs
 
     ;;; Now the meat of the program: Loop over all addresses $00 to $FF and clear them all out
-    lda #$00                       ; Load the literal decimal value of 0 into A
+    lda #0                        ; Load the literal decimal value of 0 into A
     inx                           ; X now holds $00. This means the following iteration will first set this
                                   ; memory position of $00 to 0, then the "dex" argument, below, will then
-                                  ; decrement it "around" the limit to $FF. Then the one-off bug of missing
+                                  ; decrement it and "roll-over" the limit to $FF. Then the one-off bug of missing
                                   ; address $00 is thus solved.
 MemLoop:
     sta $00,x

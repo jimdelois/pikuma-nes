@@ -7,13 +7,13 @@ build:
 	ld65 -C $(CFG) $(NAME).o -o $(NAME).nes
 
 clean:
-	rm $(NAME).o $(NAME).nes
+	rm -f $(NAME).o $(NAME).nes
 
 clean-all:
-	rm *.o *.nes
+	rm -f *.o *.nes
 
 clean-all-all:
-	rm *.fdb *.o *.nes
+	rm -f *.fdb *.o *.nes
 
 run:
 	fceux $(NAME).nes
