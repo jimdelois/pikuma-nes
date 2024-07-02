@@ -23,23 +23,22 @@
 ;  Val: |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |
 ;       -------------------------------------------------------------------
 RESET:
+    cld    ; I forgot to add this, as a matter of good practice...
+
     ; Initialize the Y register with the decimal value 10
     ldy #10
-    iny ; I have added this line and rearranged the list, below, to make sure that we
-        ; still set $00 into $80 before breaking the loop
 Loop:
-    ; Decrement Y
-    dey
     ; Transfer Y to A
     tya
     ; Store the value in A inside memory position $80+Y
     sta $80,y
+    ; Decrement Y
+    dey
     ; Branch back to "Loop" until we are done
-    bne Loop
+    bpl Loop ; Instead of testing against ZERO, we test against NEGATIVE, which ensures we fill the last position of $80.
 
-;;; End of program...
-LoopForever:
-    jmp LoopForever
+    ; Creating this infinite loop makes it easier to debug multiple times in a row.
+    jmp RESET
 
 
 NMI:

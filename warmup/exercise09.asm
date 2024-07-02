@@ -18,6 +18,8 @@
 ; literal number. Once the comparison is done, the processor flags will be
 ; set (zero if the compared values are equal, non-zero if different).
 RESET:
+    cld    ; I forgot to add this, as a matter of good practice...
+
     ; Initialize the A register with 1
     lda #1
 Loop:
@@ -29,9 +31,8 @@ Loop:
     ; Branch back to "Loop" if the comparison was not equals (to zero)
     bne Loop
 
-;;; End of program...
-LoopForever:
-    jmp LoopForever
+    ; Creating this infinite loop makes it easier to debug multiple times in a row.
+    jmp RESET
 
 
 NMI:

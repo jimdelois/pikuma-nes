@@ -15,6 +15,8 @@
 ; Exercise 02
 ; Your goal here is to just store some values into zero-page memory positions.
 RESET:
+    cld    ; I forgot to add this, as a matter of good practice...
+
     ; Load the A register with the hexadecimal value $A
     lda #$0A
     ; Load the X register with the binary value %11111111
@@ -24,10 +26,8 @@ RESET:
     ; Store the value in the X register into memory address $81
     stx $81
 
-
-;;; End of program...
-LoopForever:
-    jmp LoopForever
+    ; Creating this infinite loop makes it easier to debug multiple times in a row.
+    jmp RESET
 
 
 NMI:

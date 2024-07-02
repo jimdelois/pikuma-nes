@@ -18,6 +18,8 @@
 ; into the accumulator), but we can also ask ADC to add a value from a (zero page)
 ; memory position into the accumulator.
 RESET:
+    cld    ; I forgot to add this, as a matter of good practice...
+
     ; Load the A register with the hexadecimal value $A
     lda #$0A
     ; Load the X register with the binary value %1010
@@ -32,16 +34,14 @@ RESET:
     clc
     adc $80
     ; Add to A the value inside RAM address $81
-    clc
     adc $81
     ; A should contain (#10 + $A + %1010) = #30 (or $1E in hexadecimal)
     ; Store the value of A into RAM position $82
     sta $82
 
 
-;;; End of program...
-LoopForever:
-    jmp LoopForever
+    ; Creating this infinite loop makes it easier to debug multiple times in a row.
+    jmp RESET
 
 
 NMI:

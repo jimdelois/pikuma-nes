@@ -18,6 +18,8 @@
 ; only manipulate values from the (A)ccumulator, all these additions and subtractions must
 ; be performed with the values in the A register.
 RESET:
+    cld    ; I forgot to add this, as a matter of good practice...
+
     ; Load the A register with the literal decimal value 100
     lda #100
     ; Add the decimal value 5 to the accumulator
@@ -28,9 +30,8 @@ RESET:
     sbc #10
     ; Register A should now contain the decimal 95 (or $5F in hexadecimal)
 
-;;; End of program...
-LoopForever:
-    jmp LoopForever
+    ; Creating this infinite loop makes it easier to debug multiple times in a row.
+    jmp RESET
 
 
 NMI:

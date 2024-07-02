@@ -15,6 +15,8 @@
 ; Excercise 06
 ; This exercise covers the increment and decrement instructions of the 6502.
 RESET:
+    cld    ; I forgot to add this, as a matter of good practice...
+
     ; Load the A register with the decimal value 1
     lda #1
     ; Load the X register with the decimal value 2
@@ -36,9 +38,8 @@ RESET:
     sec
     sbc #1
 
-;;; End of program...
-LoopForever:
-    jmp LoopForever
+    ; Creating this infinite loop makes it easier to debug multiple times in a row.
+    jmp RESET
 
 
 NMI:

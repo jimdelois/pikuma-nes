@@ -15,6 +15,8 @@
 ; Exercise 03
 ; This exercise is about transferring values from registers to other registers.
 RESET:
+    cld    ; I forgot to add this, as a matter of good practice...
+
     ; Load the A register with the literal decimal value 15
     lda #15
     ; Transfer the value from A to X
@@ -28,12 +30,14 @@ RESET:
     ; Load X with the decimal value 6
     ldx #6
     ; Transfer the value from X to Y
-    stx $00
-    ldy $00
+;    stx $00
+;    ldy $00
+    ; Course instruction suggests using A instead of a memory slot as I had done, above...
+    txa
+    tay
 
-;;; End of program...
-LoopForever:
-    jmp LoopForever
+    ; Creating this infinite loop makes it easier to debug multiple times in a row.
+    jmp RESET
 
 
 NMI:

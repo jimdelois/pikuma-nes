@@ -20,6 +20,8 @@
 ; processor because we can store them using only 1 byte (8 bits), which also
 ; means they can be performed relatively fast by the CPU.
 RESET:
+    cld    ; I forgot to add this, as a matter of good practice...
+
     ; Load the A register with the decimal value 10
     lda #10
     ; Store the value from A into memory position $80
@@ -29,9 +31,8 @@ RESET:
     ; Decrement the value inside a (zero page) memory position $80
     dec $80
 
-;;; End of program...
-LoopForever:
-    jmp LoopForever
+    ; Creating this infinite loop makes it easier to debug multiple times in a row.
+    jmp RESET
 
 
 NMI:
